@@ -987,10 +987,14 @@ namespace SIPSorcery.SIP.App
         /// <param name="rtpEvent">The received RTP event.</param>
         private void OnRemoteRtpEvent(RTPEvent rtpEvent)
         {
-            if (rtpEvent.EndOfEvent)
+            if (lastRtpEventEndTimeStamp != rtpEvent.Source.Header.Timestamp
+                && rtpEvent.EndOfEvent)
             {
+                lastRtpEventEndTimeStamp = rtpEvent.Source.Header.Timestamp;
                 OnDtmfTone?.Invoke(rtpEvent.EventID, rtpEvent.Duration);
             }
         }
+
+        private uint lastRtpEventEndTimeStamp;
     }
 }

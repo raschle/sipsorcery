@@ -1180,7 +1180,7 @@ namespace SIPSorcery.Net
 
                         if (RemoteRtpEventPayloadID != 0 && rtpPacket.Header.PayloadType == RemoteRtpEventPayloadID)
                         {
-                            RTPEvent rtpEvent = new RTPEvent(rtpPacket.Payload);
+                            RTPEvent rtpEvent = new RTPEvent(rtpPacket);
                             OnRtpEvent?.Invoke(rtpEvent);
                         }
                         else
